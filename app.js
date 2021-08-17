@@ -8,47 +8,43 @@ function calculator () {
     let currentOperand = ''
     let previousOperand = ''
 
-    // console.log(perviousText)
-    // console.log(currentText)
-    // console.log(Numbuttons)
-    // console.log(OperationsButton)
-    // console.log(deleteButton)
-    // console.log(clearButton)
-
     const add = (x , y) => {  return  x   +   y } 
     const subtract = (x , y) => {  return x   -   y }
     const multiply = (x , y) => {  return x   *  y  } 
     const divide = (x , y) => {  return x   /  y}  
 
-    function operate(operator, x, y) {
-        
-    }
+    // function operate(operator) {
+    //     previousOperand = currentOperand
+    //     currentOperand = " "
+    // }
 
-    //function to populate the display when the user click the numbers buttons
+    //function update the display 
     function populateDisplay() {
-        Numbuttons.map(btn =>{
-            btn.addEventListener('click', () => {
-               if ( btn.textContent === "." && currentOperand.includes('.')) return
-                currentOperand = currentOperand.toString() + btn.textContent.toString()
-                currentText.innerText = currentOperand
-                perviousText.innerText = previousOperand
-            })
-        })
-
-
-        OperationsButton.map(btn =>{
-            btn.addEventListener('click', () => {
-               if ( btn.textContent === "." && currentOperand.includes('.')) return
-                currentOperand = currentOperand.toString() + btn.textContent.toString()
-                currentText.innerText = currentOperand
-                perviousText.innerText = previousOperand
-            })
-        })
+        currentText.innerText = currentOperand
+        perviousText.innerText = previousOperand
     }
 
    
+    function handleBtnClick () {
+            Numbuttons.map(btn =>{
+                btn.addEventListener('click', () => {
+                if ( btn.textContent === "." && currentOperand.includes('.')) return
+                    currentOperand = currentOperand.toString() + btn.textContent.toString()
+                    populateDisplay()
+                })
+            })
 
-    populateDisplay()
+
+            OperationsButton.map(btn =>{
+                btn.addEventListener('click', () => {
+                if ( btn.textContent === "." && currentOperand.includes('.')) return
+                    currentOperand = currentOperand.toString() + btn.textContent.toString()
+                    populateDisplay()
+                })
+            })
+        }
+
+    handleBtnClick ()
 }
 calculator()
 
