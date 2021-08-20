@@ -7,16 +7,19 @@ function calculator () {
     const clearButton = document.querySelector('.clear')
     let currentOperand = ''
     let previousOperand = ''
+    let operation = null
+    
 
     const add = (x , y) => {  return  x   +   y } 
     const subtract = (x , y) => {  return x   -   y }
     const multiply = (x , y) => {  return x   *  y  } 
     const divide = (x , y) => {  return x   /  y}  
 
-    // function operate(operator) {
-    //     previousOperand = currentOperand
-    //     currentOperand = " "
-    // }
+    function operate(oper) {
+        operation = oper + " "
+        previousOperand = currentOperand
+        currentOperand = " "
+    }
 
     //function update the display 
     function populateDisplay() {
@@ -24,12 +27,14 @@ function calculator () {
         perviousText.innerText = previousOperand
     }
 
+
+
    
     function handleBtnClick () {
             Numbuttons.map(btn =>{
                 btn.addEventListener('click', () => {
                 if ( btn.textContent === "." && currentOperand.includes('.')) return
-                    currentOperand = currentOperand.toString() + btn.textContent.toString()
+                    currentOperand = currentOperand.toString() + btn.textContent.toString() 
                     populateDisplay()
                 })
             })
@@ -39,6 +44,7 @@ function calculator () {
                 btn.addEventListener('click', () => {
                 if ( btn.textContent === "." && currentOperand.includes('.')) return
                     currentOperand = currentOperand.toString() + btn.textContent.toString()
+                    operate(btn.textContent)
                     populateDisplay()
                 })
             })
