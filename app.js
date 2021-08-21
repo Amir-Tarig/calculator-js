@@ -1,6 +1,6 @@
 function calculator () {
-    const perviousText = document.querySelector('.previous')
-    const currentText = document.querySelector('.current')
+    let perviousText = document.querySelector('.previous')
+    let currentText = document.querySelector('.current')
     const Numbuttons = Array.from(document.querySelectorAll('.num'))
     const OperationsButton = Array.from(document.querySelectorAll('.operation'))
     const deleteButton = document.querySelector('.delete')
@@ -10,81 +10,69 @@ function calculator () {
     let previousOperand = ''
     let operation = undefined
 
+    function clearAll() {
+        clearButton.addEventListener('click', () => {
+            currentOperand = ''
+            previousOperand = ''
+            operation = undefined
+            upDateDisplay()
+        })
+    }
 
-    function handleBtnClick () {
-        Numbuttons.map(btn =>{
+    function handleNums() {
+        Numbuttons.map(btn => {
             btn.addEventListener('click', () => {
-            if ( btn.innerText === "." && currentOperand.includes('.')) return
-                currentOperand = currentOperand.toString() + btn.innerText.toString() 
-                populateDisplay()
+                currentOperand += btn.textContent.toString()
+                upDateDisplay()
             })
         })
 
-
-        OperationsButton.map(btn =>{
+        OperationsButton.map(btn => {
             btn.addEventListener('click', () => {
-            // if ( btn.textContent === ' . ' && currentOperand.includes(' . ')) return
-                // currentOperand = currentOperand.toString() + " " + btn.textContent.toString()
-                operate(btn.innerText)
-                populateDisplay()
+                operation = btn.textContent
+                // currentOperand += operation
+                operate()
+                upDateDisplay()
             })
         })
 
         equalBtn.addEventListener('click', () => {
             calculateResults()
-            populateDisplay()
+            upDateDisplay()
         })
-
     }
-    
 
-    const add = (x , y) => {  return  x   +   y } 
-    const subtract = (x , y) => {  return x   -   y }
-    const multiply = (x , y) => {  return x   *  y  } 
-    const divide = (x , y) => {  return x   /  y}  
-
-    function operate(oper) {
-        if(currentOperand === '') return 
-       
+    function operate() {
+        if(currentOperand === ' ') return
         if(previousOperand !== ' ') {
-            calculateResults()  
+            calculateResults()
         }
-        operation = oper 
         previousOperand = currentOperand
-        console.log(currentOperand)
-        currentOperand = ''
-
+        currentOperand = ' '
     }
 
+    function  calculateResults() {
+        const curr = parseFloat(currentOperand)
+        const prev = parseFloat(previousOperand)
+        let results;
 
-    function calculateResults() {
-        let pre = parseFloat(previousOperand)
-        let curr = parseFloat(currentOperand)
-        console.log(pre + "pre")
-        console.log(curr + "curr")
-        let results
-
-        // console.log(operation)
-        if(operation === '+') {
-            results = add(pre, curr)
-            // console.log(results)
-        }else {
-            console.log('no') ;
-        }
+        if( isNaN(prev)||  isNaN(curr) ) return 
+          operation === '+' ? results = prev  + curr
+        : operation === '-' ? results =  prev - curr
+        : operation === '*' ? results = prev * curr
+        : operation === '÷' ? results = prev / curr
+        : '';
+        currentOperand = results
+        operation = undefined
+        previousOperand = ''
     }
 
-    //function update the display 
-    function populateDisplay() {
-        currentText.innerText = currentOperand
-        perviousText.innerText = previousOperand
+    function upDateDisplay() {
+        currentText.textContent = currentOperand
+        perviousText.textContent = previousOperand
     }
-
-
-
-   
-    
-
-    handleBtnClick ()
+    clearAll() 
+    handleNums()
 }
 calculator()
 
