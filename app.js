@@ -24,16 +24,16 @@ function calculator () {
         OperationsButton.map(btn =>{
             btn.addEventListener('click', () => {
             // if ( btn.textContent === ' . ' && currentOperand.includes(' . ')) return
-            //     currentOperand = currentOperand.toString() + " " + btn.textContent.toString()
+                // currentOperand = currentOperand.toString() + " " + btn.textContent.toString()
                 operate(btn.innerText)
                 populateDisplay()
             })
         })
 
-        // equalBtn.addEventListener('click', () => {
-        //     calculateResults()
-        //     populateDisplay()
-        // })
+        equalBtn.addEventListener('click', () => {
+            calculateResults()
+            populateDisplay()
+        })
 
     }
     
@@ -44,25 +44,30 @@ function calculator () {
     const divide = (x , y) => {  return x   /  y}  
 
     function operate(oper) {
-        if(currentOperand === ' ') return 
+        if(currentOperand === '') return 
        
-        operation = oper 
-        previousOperand = currentOperand
-        currentOperand = ' '
         if(previousOperand !== ' ') {
             calculateResults()  
         }
+        operation = oper 
+        previousOperand = currentOperand
+        console.log(currentOperand)
+        currentOperand = ''
+
     }
 
 
     function calculateResults() {
         let pre = parseFloat(previousOperand)
         let curr = parseFloat(currentOperand)
+        console.log(pre + "pre")
+        console.log(curr + "curr")
         let results
 
-        console.log(operation)
+        // console.log(operation)
         if(operation === '+') {
-            console.log('yes') 
+            results = add(pre, curr)
+            // console.log(results)
         }else {
             console.log('no') ;
         }
