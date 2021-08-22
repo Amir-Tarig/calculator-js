@@ -13,8 +13,8 @@ function calculator () {
     function handleButtons() {
         Numbuttons.map(btn => {
             btn.addEventListener('click', () => {
-                if(currentOperand.includes('.')) return
                 currentOperand === "Choose a higher number bitch" ? currentOperand = '' : ''
+                if(btn.textContent === '.' && currentOperand.includes('.')) return
                 currentOperand += btn.textContent.toString()
                 upDateDisplay()
             })
@@ -49,7 +49,7 @@ function calculator () {
         window.addEventListener('keyup' , (e) => {
             Numbuttons.map(btn => {
                 if(e.key === btn.textContent)  {
-                    if(currentOperand.includes('.')) return
+                    if(e.key === '.' && currentOperand.includes('.')) return
                     currentOperand += btn.textContent.toString()
                     upDateDisplay()
                 } 
