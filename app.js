@@ -46,28 +46,28 @@ function calculator () {
         })
 
         //adding a keyboard support
-        // window.addEventListener('keyup' , (e) => {
-        //     Numbuttons.map(btn => {
-        //         if(e.key === btn.textContent)  {
-        //             if(currentOperand.includes('.')) return
-        //             currentOperand += btn.textContent.toString()
-        //             upDateDisplay()
-        //         } 
-        //     })
+        window.addEventListener('keyup' , (e) => {
+            Numbuttons.map(btn => {
+                if(e.key === btn.textContent)  {
+                    if(currentOperand.includes('.')) return
+                    currentOperand += btn.textContent.toString()
+                    upDateDisplay()
+                } 
+            })
 
-        //     OperationsButton.map(btn => {
-        //         if(e.key === btn.textContent)  {
-        //              operation = btn.textContent
-        //               operate()
-        //              upDateDisplay()
-        //         } 
-        //     })
+            OperationsButton.map(btn => {
+                if(e.key === btn.textContent)  {
+                     operation = btn.textContent
+                      operate()
+                     upDateDisplay()
+                } 
+            })
 
-        //     if(e.key === equalBtn.textContent) {
-        //            calculateResults()
-        //            upDateDisplay()
-        //     }
-        // })
+            if(e.key === equalBtn.textContent) {
+                   calculateResults()
+                   upDateDisplay()
+            }
+        })
     }
 
     function operate() {
