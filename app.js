@@ -10,18 +10,11 @@ function calculator () {
     let previousOperand = ''
     let operation = undefined
 
-    function clearAll() {
-        clearButton.addEventListener('click', () => {
-            currentOperand = ''
-            previousOperand = ''
-            operation = undefined
-            upDateDisplay()
-        })
-    }
-
-    function handleNums() {
+    function handleButtons() {
         Numbuttons.map(btn => {
             btn.addEventListener('click', () => {
+                if(currentOperand.includes('.')) return
+                currentOperand === "Choose a higher number bitch" ? currentOperand = '' : ''
                 currentOperand += btn.textContent.toString()
                 upDateDisplay()
             })
@@ -30,16 +23,51 @@ function calculator () {
         OperationsButton.map(btn => {
             btn.addEventListener('click', () => {
                 operation = btn.textContent
-                // currentOperand += operation
                 operate()
                 upDateDisplay()
             })
+        })
+
+        deleteButton.addEventListener('click', () => {
+            currentOperand = currentOperand.slice(0, -1)
+            upDateDisplay()
         })
 
         equalBtn.addEventListener('click', () => {
             calculateResults()
             upDateDisplay()
         })
+
+        clearButton.addEventListener('click', () => {
+            currentOperand = ''
+            previousOperand = ''
+            operation = undefined
+            upDateDisplay()
+        })
+
+        //adding a keyboard support
+        // window.addEventListener('keyup' , (e) => {
+        //     Numbuttons.map(btn => {
+        //         if(e.key === btn.textContent)  {
+        //             if(currentOperand.includes('.')) return
+        //             currentOperand += btn.textContent.toString()
+        //             upDateDisplay()
+        //         } 
+        //     })
+
+        //     OperationsButton.map(btn => {
+        //         if(e.key === btn.textContent)  {
+        //              operation = btn.textContent
+        //               operate()
+        //              upDateDisplay()
+        //         } 
+        //     })
+
+        //     if(e.key === equalBtn.textContent) {
+        //            calculateResults()
+        //            upDateDisplay()
+        //     }
+        // })
     }
 
     function operate() {
@@ -47,21 +75,24 @@ function calculator () {
         if(previousOperand !== ' ') {
             calculateResults()
         }
-        previousOperand = currentOperand
+        previousOperand = `${currentOperand} ${operation}`
         currentOperand = ' '
     }
+
 
     function  calculateResults() {
         const curr = parseFloat(currentOperand)
         const prev = parseFloat(previousOperand)
         let results;
 
-        if( isNaN(prev)||  isNaN(curr) ) return 
+        if( isNaN(prev)  ||  isNaN(curr) ) return 
           operation === '+' ? results = prev  + curr
         : operation === '-' ? results =  prev - curr
         : operation === '*' ? results = prev * curr
-        : operation === '÷' ? results = prev / curr
+        : operation === '÷' && curr === 0 ? results = "Choose a higher number bitch"
+        : operation === '÷' ? results = prev / curr 
         : '';
+        //Math.round((results + Number.EPSILON) * 100) / 100;
         currentOperand = results
         operation = undefined
         previousOperand = ''
@@ -71,8 +102,14 @@ function calculator () {
         currentText.textContent = currentOperand
         perviousText.textContent = previousOperand
     }
-    clearAll() 
-    handleNums()
+
+
+
+
+
+
+  
+    handleButtons()
 }
 calculator()
 
