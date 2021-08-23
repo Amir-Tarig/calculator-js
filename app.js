@@ -14,7 +14,9 @@ function calculator () {
         Numbuttons.map(btn => {
             btn.addEventListener('click', () => {
                 currentOperand === "Choose a higher number bitch" ? currentOperand = '' : ''
+                currentOperand = currentOperand.toString()
                 if(btn.textContent === '.' && currentOperand.includes('.')) return
+                if(currentOperand === 0) currentOperand = ""
                 currentOperand += btn.textContent.toString()
                 upDateDisplay()
             })
@@ -22,6 +24,7 @@ function calculator () {
 
         OperationsButton.map(btn => {
             btn.addEventListener('click', () => {
+                if(currentOperand ===  "") return
                 operation = btn.textContent
                 operate()
                 upDateDisplay()
@@ -29,8 +32,19 @@ function calculator () {
         })
 
         deleteButton.addEventListener('click', () => {
-            currentOperand = currentOperand.slice(0, -1)
-            upDateDisplay()
+            let  temp = currentOperand.toString().slice(0, -1)
+            console.log(temp)
+            if(temp === '') {
+                temp = 0 
+                console.log(typeof temp + " " + temp)
+                currentOperand = temp
+                upDateDisplay()
+           } else {
+                currentOperand = parseFloat(temp)
+                // console.log(typeof currentOperand)
+                upDateDisplay()
+           }
+         
         })
 
         equalBtn.addEventListener('click', () => {
@@ -103,12 +117,6 @@ function calculator () {
         perviousText.textContent = previousOperand
     }
 
-
-
-
-
-
-  
     handleButtons()
 }
 calculator()
