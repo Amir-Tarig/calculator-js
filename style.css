@@ -13,6 +13,7 @@ body {
 .calc {
     position: relative;
     min-height: 100vh;
+    background: #e0e0e0;
 }
 
 .container {
@@ -29,7 +30,9 @@ body {
     grid-template-rows: minmax(120px, auto)  repeat(5, 100px);
     background:rgba(0, 0, 0, 0.02); 
     border-bottom-right-radius: 30px;
-
+    border-top-right-radius: 30px;
+    box-shadow:  20px 20px 60px #bebebe,
+             -20px -20px 60px #ffffff;
 }
 
 .container .span {
@@ -39,7 +42,7 @@ body {
 .output-screen {
     grid-column: 1 / 5;
     border-top-right-radius: 30px;
-    /* background: black; */
+    background: black;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
@@ -47,26 +50,26 @@ body {
     word-wrap: break-word;
     word-break: break-all;
     padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    /* border: 1px solid rgba(0, 0, 0, 0.3); */
     /* font-family: 'Caveat', cursive; */
 
 }
 
 .current {
     font-size: 2.2rem;
-    /* color: white; */
+    color: white;
 }
 
 .previous {
     font-size: 1.6rem;
-    /* color: white; */
+    color: white;
 }
 
 .container button {
     font-size: 1.6rem;
     background: none;
     border: 1px solid white;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    /* border: 1px solid rgba(0, 0, 0, 0.3); */
     transition: .3s ease;
 }
 
@@ -82,8 +85,9 @@ body {
     font-size: 2rem;
 }
 
-.equals {
+.container .equals {
     border-bottom-right-radius: 30px;
-    border-right: 1px solid black;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: .2px solid rgba(0, 0, 0, 0.1); */
 }
 
