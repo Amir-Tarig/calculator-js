@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Caveat', cursive;
+    font-family: 'Archivo', sans-serif;
 }
 
 body {
@@ -47,6 +47,8 @@ body {
     word-wrap: break-word;
     word-break: break-all;
     padding: 10px;
+    /* font-family: 'Caveat', cursive; */
+
 }
 
 .current {
