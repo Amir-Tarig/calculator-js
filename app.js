@@ -13,7 +13,7 @@ function calculator () {
     function handleButtons() {
         Numbuttons.map(btn => {
             btn.addEventListener('click', () => {
-                currentOperand === "Choose a higher number bitch" ? currentOperand = '' : ''
+                currentOperand === "You Can't divide by 0" ? currentOperand = '' : ''
                 currentOperand === 0 ? currentOperand = " " : '';
                 currentOperand = currentOperand.toString()
                 if(btn.textContent === '.' && currentOperand.includes('.')) return
@@ -32,8 +32,15 @@ function calculator () {
         })
 
         deleteButton.addEventListener('click', () => {
-            let  temp = currentOperand.toString().slice(0, -1)
-            if(temp === '' || temp === 0) {
+            // "Choose a higher number bitch"
+            let temp
+            if(currentOperand ===  "You Can't divide by 0") {
+                currentOperand = 0
+                temp = currentOperand
+            }else {
+                temp = currentOperand.toString().slice(0, -1)
+            }
+            if(temp === '' || temp === 0 ) {
                 temp = 0 
                 currentOperand = temp
                 upDateDisplay()
@@ -101,7 +108,7 @@ function calculator () {
           operation === '+' ? results = prev  + curr
         : operation === '-' ? results =  prev - curr
         : operation === '*' ? results = prev * curr
-        : operation === '÷' && curr === 0 ? results = "Choose a higher number bitch"
+        : operation === '÷' && curr === 0 ? results = "You Can't divide by 0"
         : operation === '÷' ? results = prev / curr 
         : '';
         //Math.round((results + Number.EPSILON) * 100) / 100;
