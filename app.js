@@ -58,7 +58,7 @@ function calculator () {
         })
 
         clearButton.addEventListener('click', () => {
-            currentOperand = ''
+            currentOperand = 0
             previousOperand = ''
             operation = undefined
             upDateDisplay()
